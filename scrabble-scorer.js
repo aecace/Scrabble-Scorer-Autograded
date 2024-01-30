@@ -33,13 +33,47 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-   console.log("Let's play some scrabble! Enter a word:");
+   let word = input.question("Let's play some scrabble!\n\nEnter a word to score: ");
+   console.log(oldScrabbleScorer(word));
+   return word;
 };
 
-let simpleScorer;
+// Define a function that takes a word as a parameter and returns a numerical score.
+// Each letter within the word is worth 1 point.
+let simpleScorer = function(word) {
+   let i = 0;
 
-let vowelBonusScorer;
+   while (i < word.length) {
+      i++;
+   }
+   
+   // console.log(`The word ${word} is worth ${i} points.`);
+   return i;
+};
+// console.log(simpleScorer("Oranges"));
 
+// Define a function that takes a word as a parameter and returns a score.
+// Each vowel within the word is worth 3 points.
+// Each consonant is worth 1 point.
+let vowelBonusScorer = function(word) {
+   let score = 0;
+   let upperCaseWord = word.toUpperCase();
+
+   for (let i = 0; i < word.length; i++) {
+      if (upperCaseWord[i].includes('A' || 'E' || 'I' || 'O' || 'U')) {
+         score += 3;
+      } else {
+         score += 1;
+      }
+   }
+   
+   // console.log(`The word ${word} is worth ${score} points.`);
+   return score;
+};
+// console.log(vowelBonusScorer("Bananas"));
+
+
+// STOPPED HERE; CLASS ON OBJECTS
 let scrabbleScorer;
 
 const scoringAlgorithms = [];
