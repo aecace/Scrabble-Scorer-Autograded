@@ -80,18 +80,18 @@ let vowelBonusScorer = function(word) {
    return Number(score);
 };
 
-let scrabbleScorer = function(word) {
+let scrabbleScorer = function(word, pointStructure) {
    let letterPoints = 0;
-   let newerPointStructure = transform(oldPointStructure);
+   // let newerPointStructure = transform(oldPointStructure);
    // console.log(newerPointStructure);
  
 	for (let i = 0; i < word.length; i++) {
       // console.log(word[i]); 
-	   for (const letter in newerPointStructure) {
+	   for (const letter in pointStructure) {
          // console.log(word[i]);
          // console.log(letter);
          if (word[i] === String(letter)) {
-            letterPoints += newerPointStructure[letter];
+            letterPoints += pointStructure[letter];
          }
 	  }
 	}
@@ -149,8 +149,8 @@ let newPointStructure = transform(oldPointStructure);
 function runProgram() {
    let word = initialPrompt();
    let scoringAlg = scorerPrompt(word);
-   transform(oldPointStructure);
-   console.log(`Score for '${word}': ${scoringAlg.scorerFunction(word)}`);
+   let pointStructure = transform(oldPointStructure);
+   console.log(`Score for '${word}': ${scoringAlg.scorerFunction(word, pointStructure)}`);
 }
 
 // Don't write any code below this line //
