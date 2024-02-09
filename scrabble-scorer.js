@@ -12,6 +12,8 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
+
+// Not used in final assignment
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
 	//let letterPoints = "";
@@ -41,50 +43,8 @@ function initialPrompt() {
    return word;
 };
 
-// Define a function that takes a word as a parameter and returns a numerical score.
-// // Each letter within the word is worth 1 point.
-// function simpleScrabbleScorer(word) {
-//    let i = 0;
 
-//    while (i < word.length) {
-//       i++;
-//    }
-   
-//    // console.log(`The word ${word} is worth ${i} points.`);
-//    return i;
-// };
-// // console.log(simpleScorer("Oranges"));
-
-// Define a function that takes a word as a parameter and returns a score.
-// // Each vowel within the word is worth 3 points.
-// // Each consonant is worth 1 point.
-// function vowelBonusScrabbleScorer(word) {
-//    let score = 0;
-//    let upperCaseWord = word.toUpperCase();
-
-//    for (let i = 0; i < word.length; i++) {
-//       if (upperCaseWord[i].includes('A')) {
-//          score += 3;
-//       } else if (upperCaseWord[i].includes('E')) {
-//          score += 3;
-//       } else if (upperCaseWord[i].includes('I')) {
-//          score += 3;
-//       } else if (upperCaseWord[i].includes('O')) {
-//          score += 3;
-//       } else if (upperCaseWord[i].includes('U')) {
-//          score += 3;
-//       } else {
-//          score += 1;
-//       }
-//    }
-   
-//    // console.log(`The word ${word} is worth ${score} points.`);
-//    return Number(score);
-// };
-// // console.log(vowelBonusScorer("Bananas"));
-
-
-// OBJECTS
+// ANON FUNCTIONS
 let simpleScorer = function(word) {
    let i = 0;
 
@@ -120,9 +80,22 @@ let vowelBonusScorer = function(word) {
    return Number(score);
 };
 
-let scrabbleScorer = function(word) {
-   return oldScrabbleScorer(word);
-}
+let scrabbleScorer = function(word, newPointStructure) {
+   let letterPoints = 0;
+   console.log(newPointStructure);
+ 
+	for (let i = 0; i < word.length; i++) {
+      console.log(word[i]); 
+	   for (const letter in newPointStructure) {
+         // console.log(word[i]);
+         // console.log(letter);
+         if (word[i] === letter) {
+            letterPoints += newPointStructure[letter];
+         }
+	  }
+	}
+	return letterPoints;
+ }
 
 const scoringAlgorithms = [
    {name: "Simple Score",
@@ -155,9 +128,9 @@ function transform(oldPointStructure) {
 
    for (const key in oldPointStructure) {
       for (let i=0; i < oldPointStructure[key].length; i++) {
-         let letter = oldPointStructure[key][i];
-         let lowerCaseLetter = letter.toLowerCase;
-         newObject[lowerCaseLetter] = Number(key);
+         let letter = String(oldPointStructure[key][i]);
+         letter = letter.toLowerCase(letter);
+         newObject[letter] = Number(key);
       }
    }
    return newObject;
@@ -169,8 +142,8 @@ function transform(oldPointStructure) {
 // console.log("Letters with score '8':", letters);
 // console.log("2nd letter within the key '8' array:", letters[1]);
 
-// Task 3
 let newPointStructure = transform(oldPointStructure);
+// console.log(newPointStructure);
 
 function runProgram() {
    let word = initialPrompt();
